@@ -1,90 +1,85 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# WhatsApp Clone (playground)
+
+This is **not** an attempt to build a pixel-perfect WhatsApp clone. It's a personal
+playground to practice React Native CLI and try out a **Spec Driven Development**
+workflow (spec → rules → design → tasks) with an AI coding assistant, using a chat
+app as the excuse.
+
+Scope on purpose is small: just a **Chat List** and a **Conversation** screen.
+Everything else (auth, calls, stories, groups, media, push notifications...) is
+explicitly out of scope — see [spec/01-requirements.md](spec/01-requirements.md).
+
+## Spec
+
+The project follows Spec Driven Development. Read these in order:
+
+- [spec/01-requirements.md](spec/01-requirements.md) — what the app does (and doesn't do)
+- [spec/02-rules.md](spec/02-rules.md) — architecture/technical rules (MVVM, SOLID, layer boundaries)
+- [spec/03-design-spec.md](spec/03-design-spec.md) — folder structure and data flow
+- [spec/04-tasks.md](spec/04-tasks.md) — what's done vs. what's left to build
+
+## Stack
+
+MVVM · Zustand (UI state) · TanStack Query (server state/cache) · axios (HTTP) ·
+MMKV (local storage) · React Navigation (native stack) · composition hooks for DI.
+
+Chats currently read/write from a local `json-server` (`db.json`) via
+`ChatServiceImpl`/`HttpChatReader`/`HttpChatReadStatusWriter`. Messages still use
+an in-memory mock (`MockMessageService`) — see [spec/04-tasks.md](spec/04-tasks.md)
+for what's left to wire up.
 
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
-## Step 1: Start Metro
-
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
-
-To start the Metro dev server, run the following command from the root of your React Native project:
+### 1. Install dependencies
 
 ```sh
-# Using npm
+npm install
+
+# iOS only, first time or after native dependency changes
+cd ios && bundle install && bundle exec pod install && cd ..
+```
+
+### 2. (Optional) Start the mock API
+
+Chats are served locally via `json-server`:
+
+```sh
+npx json-server db.json --port 3001
+```
+
+`src/services/http/httpClient.ts` points at `http://localhost:3001` (works from
+the iOS Simulator). On the Android emulator, use `http://10.0.2.2:3001` instead.
+
+### 3. Start Metro
+
+```sh
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+### 4. Build and run the app
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+# iOS
 npm run ios
 
-# OR using Yarn
-yarn ios
+# Android
+npm run android
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Checks
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+```sh
+npx tsc --noEmit
+npx eslint src App.tsx __tests__
+npx jest
+```
 
 # Troubleshooting
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+If you're having issues getting the above steps to work, see the React Native
+[Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
 # Learn More
 
