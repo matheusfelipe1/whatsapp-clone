@@ -12,3 +12,15 @@ export const colors = {
   border: '#E0E0E0',
   danger: '#D32F2F',
 };
+
+export const colorsArray = [
+    colors.primary,
+    colors.background,
+    colors.surface,
+    colors.bubbleOutgoing,
+    colors.textPrimary,
+    colors.textSecondary,
+    colors.unreadBadge,
+    colors.border,
+    colors.danger
+]

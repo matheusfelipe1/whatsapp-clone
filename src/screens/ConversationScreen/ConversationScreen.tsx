@@ -51,7 +51,7 @@ export function ConversationScreen(): React.JSX.Element {
         <TextInput
           value={draftText}
           onChangeText={onChangeDraft}
-          placeholder="Type a message"
+          placeholder="Digite uma mensagem"
           placeholderTextColor={colors.textSecondary}
           style={styles.input}
           multiline
@@ -79,10 +79,11 @@ const styles = StyleSheet.create({
   composer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    padding: 8,
+    padding: 16,
     backgroundColor: colors.surface,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.border,
+    marginBottom: Platform.OS === 'ios' ? 20 : 0,
   },
   input: {
     flex: 1,

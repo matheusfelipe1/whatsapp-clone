@@ -1,0 +1,22 @@
+{
+  "chats": [
+    {
+      "name": "Ana Colacio",
+      "avatarColor": "#25D366",
+      "lastMessage": "",
+      "lastMessageAt": 1787711840365,
+      "unreadCount": 0,
+      "id": "Qb6_sBOME88"
+    },
+    {
+      "name": "John Lennon",
+      "avatarColor": "#075E54",
+      "lastMessage": "",
+      "lastMessageAt": 1787712228621,
+      "unreadCount": 0,
+      "id": "DVMIcRfQWdY"
+    }
+  ],
+  "messages": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}

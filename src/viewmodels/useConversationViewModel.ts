@@ -36,6 +36,7 @@ export function useConversationViewModel(chatId: string) {
     }
     sendMessageMutation.mutate(text);
     onChangeDraft('');
+    setDraftText('');
   }
 
   return {

@@ -27,4 +27,20 @@ export class MockChatService implements ChatService {
     );
     return delay(undefined, 100);
   }
+  async sendMessage(chatId: string, text: string): Promise<void> {
+    // In a real implementation, this would send a message to the backend.
+    return delay(undefined, 100);
+  }
+    async createUserChat(userName: string, avatarColor: string): Promise<ChatSummary> {
+    const newChat: ChatSummary = {
+      id: `chat-${Date.now()}`,
+      name: userName,
+      avatarColor,
+      lastMessage: '',
+      lastMessageAt: Date.now(),
+      unreadCount: 0,
+    };
+    this.chats.push(newChat);
+    return delay(newChat);
+  }
 }

@@ -7,7 +7,7 @@ import axios from 'axios';
  * TODO: point baseURL at your real backend once one exists.
  */
 export const httpClient = axios.create({
-  baseURL: 'https://api.example.com',
+  baseURL: 'http://localhost:3001/',
   timeout: 10_000,
 });
 
